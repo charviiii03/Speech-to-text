@@ -15,7 +15,7 @@ const port = 5050;
 // Middleware
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:5173","https://speech-frontend-5zfo.onrender.com"], // your frontend port
+  origin: "https://speech-frontend-5zfo.onrender.com", // your frontend port
   credentials: true
 }));
 
