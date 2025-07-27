@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 
+// ✅ Change this to your backend URL once
+const BASE_URL = "https://speech-to-text-1-ztov.onrender.com";
+
 export default function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
@@ -14,7 +17,7 @@ export default function App() {
 
   const fetchHistory = async () => {
     try {
-      const res = await fetch("http://localhost:5050/history");
+      const res = await fetch(`${BASE_URL}/history`);
       const data = await res.json();
       setHistory(data);
     } catch (err) {
@@ -30,7 +33,7 @@ export default function App() {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:5050/history/${id}`, {
+      await fetch(`${BASE_URL}/history/${id}`, {
         method: "DELETE",
       });
       fetchHistory();
@@ -54,7 +57,7 @@ export default function App() {
       formData.append("audio", blob, "recording.webm");
 
       try {
-        const response = await fetch("http://localhost:5050/upload", {
+        const response = await fetch(`${BASE_URL}/upload`, {
           method: "POST",
           body: formData,
         });
@@ -116,7 +119,7 @@ export default function App() {
     const formData = new FormData();
     formData.append("audio", file);
 
-    fetch("http://localhost:5050/upload", {
+    fetch(`${BASE_URL}/upload`, {
       method: "POST",
       body: formData,
     })
